@@ -418,7 +418,8 @@ COPY --chmod=0755 docker/entrypoint-dispatch.sh /opt/hermes/docker/entrypoint-di
 # binary by absolute path, so this PATH ordering is transparent to
 # every other consumer.
 ENV PATH="/opt/hermes/bin:/opt/hermes/.venv/bin:/opt/data/.local/bin:${PATH}"
-RUN mkdir -p /opt/data
+RUN mkdir -p /opt/data && \
+    printf 'model:\n  default: "openai/gpt-4o-mini"\n  provider: "auto"\n' > /opt/data/config.yaml
 
 # The image ENTRYPOINT is a tiny dispatcher rather than `/init` directly.
 # When the image really owns PID 1 (normal Docker / Podman), the dispatcher
