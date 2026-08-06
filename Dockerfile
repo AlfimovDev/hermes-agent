@@ -419,7 +419,7 @@ COPY --chmod=0755 docker/entrypoint-dispatch.sh /opt/hermes/docker/entrypoint-di
 # every other consumer.
 ENV PATH="/opt/hermes/bin:/opt/hermes/.venv/bin:/opt/data/.local/bin:${PATH}"
 RUN mkdir -p /opt/data && \
-    printf 'model:\n  default: "gpt-4o-mini"\n  base_url: "https://api.openai.com/v1"\nagent:\n  reasoning_effort: "none"\n' > /opt/data/config.yaml
+    printf 'model:\n  default: "gpt-4o-mini"\n  base_url: "https://api.openai.com/v1"\nagent:\n  reasoning_effort: "none"\nauxiliary:\n  compression:\n    provider: "auto"\n    base_url: "https://api.openai.com/v1"\n    model: "gpt-4o-mini"\n  title_generation:\n    provider: "auto"\n    base_url: "https://api.openai.com/v1"\n    model: "gpt-4o-mini"\n  vision:\n    provider: "auto"\n    base_url: "https://api.openai.com/v1"\n    model: "gpt-4o-mini"\n' > /opt/data/config.yaml
 
 # The image ENTRYPOINT is a tiny dispatcher rather than `/init` directly.
 # When the image really owns PID 1 (normal Docker / Podman), the dispatcher
